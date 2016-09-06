@@ -1,0 +1,16 @@
+ul{
+    list-style: none;
+    padding: 10px;
+    margin-left: 150px;
+    width: 30%;
+    float: left;
+    border: 1px solid black;
+    background: #eeeeee;
+    font-size: medium;
+}
+h1{
+    text-align: center;
+}
+#todoForm{
+    text-align: center;
+}
