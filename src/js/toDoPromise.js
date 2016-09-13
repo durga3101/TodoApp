@@ -1,6 +1,6 @@
 
 document.getElementById("addButton").addEventListener('click',function () {
-    let item = document.getElementById("todoInput").value;
+    var item = document.getElementById("todoInput").value;
 
     let promiseTodo = new Promise(function (resolve, reject) {
         if (item.length > 0) {
@@ -23,16 +23,12 @@ document.getElementById("addButton").addEventListener('click',function () {
 });
 
 var addToList = function (item) {
-    let text = document.createTextNode(item);
-    let newItem = document.createElement("li");
-    let toDoCheckbox = document.createElement("input");
-    toDoCheckbox.setAttribute("type", "checkbox");
-    toDoCheckbox.textContent = text;
+    let{text, newItem, checkbox} =createElements(item);
 
     newItem.appendChild(text);
-    newItem.appendChild(toDoCheckbox);
+    newItem.appendChild(checkbox);
 
-    toDoCheckbox.addEventListener('click', function () {
+    checkbox.addEventListener('click', function () {
 
         var promiseDone = new Promise(function (resolve, reject) {
             if (newItem.textContent.length > 0) {
@@ -47,7 +43,7 @@ var addToList = function (item) {
 
             document.getElementById("todoDone").appendChild(addToDone(text));
 
-            newItem.removeChild(toDoCheckbox);
+            newItem.removeChild(checkbox);
             newItem.removeChild(text);
 
         }).catch(function (error) {
@@ -56,12 +52,20 @@ var addToList = function (item) {
     });
     return newItem;
 };
+function createElements(item) {
+    let newItem = document.createElement("li");
+    let text = document.createTextNode(item);
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.textContent = text;
+    return {text, newItem, checkbox};
+}
 
 var addToDone = function (text) {
     let doneItem = document.createElement("li");
     let doneCheckbox = document.createElement("input");
     doneCheckbox.setAttribute("type", "checkbox");
-
+    
     doneItem.appendChild(text);
     doneItem.appendChild(doneCheckbox);
 
