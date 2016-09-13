@@ -1,6 +1,7 @@
 function todoList() {
-    var item=document.getElementById("todoInput").value;
-    if(item.length>0) {
+    var item = document.getElementById("todoInput").value;
+
+    if (item.length > 0) {
         var text = document.createTextNode(item);
 
         var newItem = document.createElement("li");
@@ -8,8 +9,8 @@ function todoList() {
         toDoCheckbox.setAttribute("type", "checkbox");
         toDoCheckbox.textContent = text;
 
-        newItem.appendChild(toDoCheckbox);
         newItem.appendChild(text);
+        newItem.appendChild(toDoCheckbox);
         document.getElementById("todoList").appendChild(newItem);
 
         toDoCheckbox.addEventListener('click', function () {
@@ -17,8 +18,8 @@ function todoList() {
             var doneCheckbox = document.createElement("input");
             doneCheckbox.setAttribute("type", "checkbox");
 
-            doneItem.appendChild(doneCheckbox)
             doneItem.appendChild(text);
+            doneItem.appendChild(doneCheckbox);
 
             document.getElementById("todoDone").appendChild(doneItem);
 
@@ -28,11 +29,12 @@ function todoList() {
                 doneItem.removeChild(doneCheckbox);
                 doneItem.removeChild(text);
             });
+            document.getElementById("todoInput").value = '';
         });
-        document.getElementById("todoInput").value = '';
     }
-    else{
-        alert("Enter some task");
-    }
+    else
+        {
+            alert("Enter some task");
+        }
 
 }
